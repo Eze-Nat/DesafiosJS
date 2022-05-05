@@ -1,6 +1,9 @@
 let opcion = mostrarMenu();
 let dineroIngresado = 0;
 let cantidadIngresada = 0;
+let cantidadValida = true;
+let dineroValido = true;
+
 
 if (opcion != 3) {
     cantidadProducto(opcion);
@@ -18,10 +21,9 @@ function mostrarMenu() {
 }
 
 function cantidadProducto(opcion) {
-    if (opcion == 1) {
-        pedirCantidad()
-    } else if (opcion == 2) {
-        pedirCantidad()
+    let stock = Math.round(Math.random() * (999 - 1) + 1);
+    if (opcion) {
+        pedirCantidad(stock)
     } else {
         alert("opcion invalida")
     }
@@ -29,43 +31,56 @@ function cantidadProducto(opcion) {
 
 
 function pedirCantidad(numMin) {
-    while (cantidadIngresada < numMin) {
-        let cantidad = Number(prompt("Ingrese cantidad"));
+    let cantidad;
+    while (cantidadValida) {
+        cantidadValida = false;
+        cantidad = Number(prompt("Ingrese cantidad"));
 
-        if (cantidad !== 0) {
-            alert("Cantidad invalida")
+        if (cantidad <= 0 || cantidad > numMin) {
+            alert("Cantidad invalida");
+            cantidadValida = true;
         } else {
             cantidadIngresada += cantidad;
+            cantidadValida = false;
         }
     }
-    function resultado(pedirCantidad)
-    {
-        return cantidad * 800;
-        return cantidad * 1200;    }
+
+    let total = 0;
+
+    if(opcion == 1){
+      total = cantidad * 800;
+    }else{
+      total = cantidad * 1200;
     }
-    
+
+    alert("El total es " + total)
+
+    venderProducto(total);
+}
 
 
-function venderProducto(opcion) {
-    if (opcion == 1) {
-        pedirDinero(resultado)
-    } else if (opcion == 2) {
-        pedirDinero(resultado)
+function venderProducto(total) {
+    if (total) {
+        pedirDinero(total)
     } else {
-        alert("opcion invalida")
+        alert("Opcion invalida")
     }
 }
 
-function pedirDinero(numMin) {
-    while (dineroIngresado < numMin) {
-        let dinero = Number(prompt("Ingrese un monto"));
-
-        if (dinero !== resultado) {
-            alert("monto invalido")
+function pedirDinero(total) {
+    let dinero;
+    while (dineroValido) {
+        dinero = Number(prompt("Ingrese un monto"));
+        if (dinero < total) {
+            alert("No tenes fondos suficientes");
+            dineroValido = true;
         } else {
             dineroIngresado += dinero;
+            dineroValido = false;
         }
     }
 
+    alert("El total es " + total + ", ya se encuentra pago");
+    alert("Su vuelto es " + (dineroIngresado - total));
 }
 
