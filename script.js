@@ -1,19 +1,19 @@
-let fecha = Number(prompt(`INGRESE SU AÑO DE NACIMIENTO`));
+let contador;
+contador = 1;
 
-if (fecha <= 2004)  
+while (contador<5){
+    let dato = prompt(`Introduce un numero del 1 al 10`);
+    let num = parseInt(dato);
 
-{
-    let nombre = prompt("Ingresa su nombre");
-    let apellido = prompt("Ingresa su apellido");
+    alert(`El numero introducido es ${num}`);
+    alert(`El contador es ${contador}`);
 
-    nombre = nombre.toUpperCase();
-    apellido = apellido.toUpperCase();
-
-    alert(`Bienvenido `+nombre+" "+apellido)
+    contador = contador+1;
 }
 
-else
-{
-    alert(`No sos mayor de edad`);
+let ingresarPasos = parseInt(prompt("Ingresar cantidad de pasos"));
+for (let i = 1; i <= 10; i++) {
+    let resultado = ingresarPasos + i ;
+    alert("Metros recorridos a cada paso: " + resultado);
 }
 
