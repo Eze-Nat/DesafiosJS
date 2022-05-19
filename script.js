@@ -1,26 +1,23 @@
-let contador=0;
-let miArray= [];
+const vino = [
+    {
+        id:1,
+        nombre:"Mimi malbec merlot",
+        precio:860,
+    },
+    {
+        id: 2,
+        nombre:"Casa Araujo cask malbec",
+        precio: 850,
+    },
+    {
+        id: 3,
+        nombre:"Pragmatico Malbec",
+        precio: 820,
+    },
 
+]
 
-while(contador<=5){
-    let numero = Number(prompt("Ingrese Un Número"));
-    miArray.push(numero);
-    contador++;
+for (const vinos of vino) {
+    console.log(vino.id);
+    console.log(vino.nombre);
 }
-
-let suma = 0;
-for(let i=0; i<miArray.length;i++)
-{
-    suma += miArray[i]; // es igual a  ====>>>> suma = suma + miArray[i];
-}
-
-console.log(suma);
-
-let multiplicacion=1;
-for(let i=0;i<miArray.length;i++)
-{
-    multiplicacion *= miArray[i];
-}
-
-console.log(multiplicacion);
-
