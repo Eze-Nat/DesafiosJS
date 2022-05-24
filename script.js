@@ -1,10 +1,11 @@
 let opcion = mostrarMenu();
-let opcion1 = mostrarMenu1();
-let opcion2 = mostrarMenu2();
+let opcion1 = 0;
+
 let dineroIngresado = 0;
 let cantidadIngresada = 0;
 let cantidadValida = true;
 let dineroValido = true;
+
 
 
 class Vino {
@@ -15,12 +16,12 @@ class Vino {
     }
 }
 
-const vino1 = new Vino(1, "Galileo Blend Tinto", "950");
-const vino2 = new Vino(2, "Pragmatico Malbec", "820");
-const vino3 = new Vino(3, "Ejes Malbec", "500");
-const vino4 = new Vino(4, "Casa Araujo Cask Malbec", "850");
-const vino5 = new Vino(5, "Nucha Malbec Organico", "950");
-const vino6 = new Vino(6, "Septima Malbec", "750");
+const vino1 = new Vino(1, "Galileo Blend Tinto", 950);
+const vino2 = new Vino(2, "Pragmatico Malbec", 820);
+const vino3 = new Vino(3, "Ejes Malbec", 500);
+const vino4 = new Vino(4, "Casa Araujo Cask Malbec", 850);
+const vino5 = new Vino(5, "Nucha Malbec Organico", 950);
+const vino6 = new Vino(6, "Septima Malbec", 750);
 
 const vinos = [vino1, vino2, vino3, vino4, vino5, vino6];
 
@@ -41,14 +42,24 @@ const queso6 = new Queso(6, "Criollo", 2500);
 
 const quesos = [queso1, queso2, queso3, queso4, queso5, queso6];
 
+console.log('aca: ' + opcion);
 
 if (opcion == 1) {
     listarVinos(opcion);
 } else if (opcion == 2) {
-    listarQuesos(opcion)
+    listarQuesos(opcion);
 } else {
     alert("GRACIAS");
 }
+
+
+if (opcion != 3) {
+    cantidadProducto(opcion, opcion1);
+} else {
+    alert("GRACIAS");
+}
+
+
 
 
 function mostrarMenu() {
@@ -59,100 +70,61 @@ function mostrarMenu() {
 
 }
 
-switch (opcion) {
-    case 1: {
-        listarVinos()
-    }
-    case 3: {
-        listarQuesos()
-    }
-    default: {
-        alert("opcion inválida");
-        break;
-    }
-}
-
-if (opcion1 == 1) {
-    vino1(opcion1);
-} else if (opcion1 == 2) {
-    vino2(opcion1)
-} else if (opcion1 == 3) {
-    vino3(opcion1)
-} else if (opcion1 == 4) {
-    vino4(opcion1)
-} else if (opcion1 == 5) {
-    vino5(opcion1)
-} else if (opcion1 == 6) {
-    vino6(opcion1)
-} else 
-{
-    alert("GRACIAS");
-}
-
 function mostrarMenu1() {
-    return prompt(`"Elija una opcion" ${Vino}`);
+
+    let vinosDesc = "";
+    vinos.forEach(vino => {
+        vinosDesc = vinosDesc + "Vino: " + vino.id + " Nombre: " + vino.nombre + " Precio: " + vino.precio + "\n";
+    });
+    return prompt("Elija una opcion: \n" + vinosDesc);
 
 }
 
-if (opcion2 == 1) {
-    queso1(opcion2);
-} else if (opcion2 == 2) {
-    queso2(opcion2)
-} else if (opcion2 == 3) {
-    queso3(opcion2)
-} else if (opcion2 == 4) {
-    queso4(opcion2)
-} else if (opcion2 == 5) {
-    queso5(opcion2)
-} else if (opcion2 == 6) {
-    queso6(opcion2)
-} else 
-{
-    alert("GRACIAS");
-}
 
 function mostrarMenu2() {
-    return prompt(`"Elija una opcion" ${Queso}`);
+
+    let quesosDesc = "";
+    quesos.forEach(queso => {
+        quesosDesc = quesosDesc + "Queso: " + queso.id + " Nombre: " + queso.nombre + " Precio: " + queso.precio + "\n";
+    });
+    return prompt("Elija una opcion: \n" + quesosDesc);
 
 }
+
 function listarVinos(opcion) {
-    let listaVinos; {
-        if (opcion) {
-            mostrarMenu1(opcion)
-        }
+    if (opcion) {
+        opcion1 = mostrarMenu1();
     }
 }
 
 function listarQuesos(opcion) {
-    let listarQuesos; {
-        if (opcion) {
-            mostrarMenu2(opcion)
-        }
+    if (opcion) {
+        opcion1 = mostrarMenu2();
     }
 }
 
-function cantidadProducto(opcion1) {
+function cantidadProducto(opcion, opcion1) {
     let stock = 999;
     if (opcion1) {
-        pedirCantidad(stock)
+        pedirCantidad(stock);
     } else {
-        alert("opcion invalida")
+        alert("opcion invalida");
     }
 }
-function cantidadProducto(opcion2) {
-    let stock = 999;
-    if (opcion2) {
-        pedirCantidad(stock)
-    } else {
-        alert("opcion invalida")
-    }
-}
+
 
 function pedirCantidad(numMin) {
     let cantidad;
+    console.log(opcion + " " + opcion1);
     while (cantidadValida) {
         cantidadValida = false;
-        cantidad = Number(prompt("Ingrese cantidad"));
+        if (opcion == 1) { //vinos
+            cantidad = Number(prompt("Ingrese cantidad de " + vinos[opcion1 - 1].nombre));
+        } else {
+            cantidad = Number(prompt("Ingrese cantidad de " + quesos[opcion1 - 1].nombre));
+        }
+
+
 
         if (cantidad <= 0 || cantidad > numMin) {
             alert("Cantidad invalida");
@@ -165,13 +137,13 @@ function pedirCantidad(numMin) {
 
     let total = 0;
 
-    if (opcion == id) {
-        total = cantidad * precio;
+    if (opcion == 1) { //vinos
+        total = cantidad * vinos[opcion1 - 1].precio;
     } else {
-        total = cantidad * precio;
+        total = cantidad * quesos[opcion1 - 1].precio;
     }
 
-    alert("El total es " + total)
+    alert("El total es " + total);
 
     venderProducto(total);
 }
